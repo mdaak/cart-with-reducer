@@ -10,14 +10,14 @@ function Cart() {
     setTotal(cart.reduce((acc, curr) => acc + Number(curr.price)*curr.qty, 0 ))
   },[cart]);
   console.log(cart)
+
   return (
     <div className='home'>
-
       <div className='productContainer'>
         <ListGroup>
       {
-        cart.map((prod, i)=>(
-          <ListGroup.Item key={i}>
+        cart.map((prod)=>(
+          <ListGroup.Item key={prod.id}>
                       <Row >
                         <Col md={2}>
                           <Image src={prod.image} alt='' fluid rounded/>
@@ -27,12 +27,20 @@ function Cart() {
                             {prod.name}
                           </span>
                         </Col>
-                        <Col md={2}>{prod.price}</Col>
+                        <Col md={2}>${prod.price}</Col>
                         <Col md={2}>
-                          <Rating rating={prod.rating}/>
+                          <Rating rating={prod.ratings}/>
                         </Col>
                         <Col md={2}>
-                          <Form.Control as='select' value={prod.qty}>
+                          <Form.Control as='select' value={prod.qty}
+                          onChange={(e)=>dispatch({
+                            type:'CHANGE_CART_QTY',
+                            payload:{
+                              id:prod.id,
+                              qty:e.target.value,
+                            },
+                          })}
+                          >
                             {[...Array(prod.inStock).keys()].map((x)=>(<option key={x+1}>
                               {x+1}
                             </option>))}

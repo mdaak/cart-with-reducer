@@ -9,7 +9,8 @@ import './styles.css';
 function Hader() {
     const {
         state:{cart},
-        dispatch
+        dispatch,
+        productDispatch
     } = CartState();
   return (
     <Navbar bg='dark' variant='dark' style={{height :80}}>
@@ -22,8 +23,16 @@ function Hader() {
                 >
                 <FormControl
                 style={{width : 500}}
-                placeholder='search a product'
+                placeholder='search a product...'
                 className='m-auto'
+                // aria-label='Search'
+                onChange={(e)=>{
+                    console.log(e.target.value)
+                    productDispatch({
+                        type:"FILTER_BY_SEARCH",
+                        payload:e.target.value,
+                    })
+                }}
                 />
             </Navbar.Text>
             <Nav >
