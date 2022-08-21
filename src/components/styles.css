@@ -1,3 +1,9 @@
+.header{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0;
+}
 .home{
     display: flex;
 }
