@@ -13,6 +13,9 @@ function Hader() {
         productDispatch
     } = CartState();
     return (
+        <div>
+
+        
         <Navbar bg='dark' variant='dark' style={{ height: 80 }}>
             <Container >
                 <Navbar.Brand>
@@ -38,8 +41,8 @@ function Hader() {
                     </Navbar.Text>
                 )}
 
-                <Nav >
-                    <Dropdown alignRight>
+                <Nav>
+                    <Dropdown alignLeft>
                         <Dropdown.Toggle variant='success'>
                             <FaShoppingCart color='white' fontSize='25px' />
                             <Badge>{cart.length}</Badge>
@@ -48,7 +51,8 @@ function Hader() {
                             {cart.length > 0 ? (
                                 <>
                                     {cart.map((prod) => (
-                                        <span className='cartitem' key={prod.id}>
+                                        <Dropdown.Item className='cartitem' key={prod.id}>
+                                            
                                             <img
                                                 className='cartItemImg'
                                                 src={prod.image}
@@ -68,7 +72,7 @@ function Hader() {
                                                     payload: prod,
                                                 })}
                                             />
-                                        </span>
+                                        </Dropdown.Item>
                                     ))}
                                     <Link to='/cart'>
                                         <Button style={{
@@ -90,6 +94,7 @@ function Hader() {
                 </Nav>
             </Container>
         </Navbar>
+        </div>
     )
 }
 
