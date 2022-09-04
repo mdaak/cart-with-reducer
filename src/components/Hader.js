@@ -15,7 +15,7 @@ function Hader() {
     return (
         <div >
             <Navbar bg='dark' variant='dark' style={{ height: 80 }}>
-                <Container style={{ border: '1px solid red', justifyContent:'center' }}>
+                <Container style={{ justifyContent:'center' }}>
                     <Navbar.Brand>
                         <Link to='/'>shoping cart</Link>
                     </Navbar.Brand>
@@ -49,7 +49,7 @@ function Hader() {
                                 {cart.length > 0 ? (
                                     <>
                                         {cart.map((prod) => (
-                                            <Dropdown.Item className='cartitem' key={prod.id}>
+                                            <Dropdown.Item style={{display:'flex'}} key={prod.id}>
 
                                                 <img
                                                     className='cartItemImg'

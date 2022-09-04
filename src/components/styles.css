@@ -1,6 +1,4 @@
-/* .Container{
-    align-items: center;
-} */
+
 
 .header{
     display: block;
@@ -37,11 +35,12 @@
     width: 30%;
     margin: 10px;
 }
-.cartitem{
+.cartitem >link{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 20px;
+    border: 10px solid red;
 
 }
 .cartItemImg{
