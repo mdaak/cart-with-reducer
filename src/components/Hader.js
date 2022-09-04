@@ -13,87 +13,85 @@ function Hader() {
         productDispatch
     } = CartState();
     return (
-        <div>
+        <div >
+            <Navbar bg='dark' variant='dark' style={{ height: 80 }}>
+                <Container style={{ border: '1px solid red', justifyContent:'center' }}>
+                    <Navbar.Brand>
+                        <Link to='/'>shoping cart</Link>
+                    </Navbar.Brand>
+                    {useLocation().pathname.split("/")[1] !== "cart" && (
+                        <Navbar.Text
+                            className='search'
+                        >
+                            <FormControl
+                                style={{ width: 500 }}
+                                placeholder='search a product...'
+                                className='m-auto'
+                                aria-label='Search'
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                    productDispatch({
+                                        type: "FILTER_BY_SEARCH",
+                                        payload: e.target.value,
+                                    })
+                                }}
+                            />
+                        </Navbar.Text>
+                    )}
 
-        
-        <Navbar bg='dark' variant='dark' style={{ height: 80 }}>
-            <Container >
-                <Navbar.Brand>
-                    <Link to='/'>shoping cart</Link>
-                </Navbar.Brand>
-                {useLocation().pathname.split("/")[1] !== "cart" && (
-                    <Navbar.Text
-                        className='search'
-                    >
-                        <FormControl
-                            style={{ width: 500 }}
-                            placeholder='search a product...'
-                            className='m-auto'
-                            aria-label='Search'
-                            onChange={(e) => {
-                                console.log(e.target.value)
-                                productDispatch({
-                                    type: "FILTER_BY_SEARCH",
-                                    payload: e.target.value,
-                                })
-                            }}
-                        />
-                    </Navbar.Text>
-                )}
+                    <Nav>
+                        <Dropdown alignLeft>
+                            <Dropdown.Toggle variant='success'>
+                                <FaShoppingCart color='white' fontSize='25px' />
+                                <Badge>{cart.length}</Badge>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu style={{ minWidth: 370 }}>
+                                {cart.length > 0 ? (
+                                    <>
+                                        {cart.map((prod) => (
+                                            <Dropdown.Item className='cartitem' key={prod.id}>
 
-                <Nav>
-                    <Dropdown alignLeft>
-                        <Dropdown.Toggle variant='success'>
-                            <FaShoppingCart color='white' fontSize='25px' />
-                            <Badge>{cart.length}</Badge>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu style={{ minWidth: 370 }}>
-                            {cart.length > 0 ? (
-                                <>
-                                    {cart.map((prod) => (
-                                        <Dropdown.Item className='cartitem' key={prod.id}>
-                                            
-                                            <img
-                                                className='cartItemImg'
-                                                src={prod.image}
-                                                alt={prod.name}
-                                            />
-                                            <div className='cartItemDetail'>
-                                                <span>{prod.name}</span>
-                                                <span>$
-                                                    {prod.price.split(".")[0]}
-                                                </span>
-                                            </div>
-                                            <AiFillDelete
-                                                fontSize='20px'
-                                                style={{ cursor: 'pointer' }}
-                                                onClick={() => dispatch({
-                                                    type: "REMOVE_FROM_CART",
-                                                    payload: prod,
-                                                })}
-                                            />
-                                        </Dropdown.Item>
-                                    ))}
-                                    <Link to='/cart'>
-                                        <Button style={{
-                                            width: '95%',
-                                            margin: '0 10px'
-                                        }}>
-                                            Go to Cart
-                                        </Button>
-                                    </Link>
-                                </>
-                            ) : (
-                                <span style={{ padding: 10 }}> cart is ampty</span>
-                            )}
+                                                <img
+                                                    className='cartItemImg'
+                                                    src={prod.image}
+                                                    alt={prod.name}
+                                                />
+                                                <div className='cartItemDetail'>
+                                                    <span>{prod.name}</span>
+                                                    <span>$
+                                                        {prod.price.split(".")[0]}
+                                                    </span>
+                                                </div>
+                                                <AiFillDelete
+                                                    fontSize='20px'
+                                                    style={{ cursor: 'pointer' }}
+                                                    onClick={() => dispatch({
+                                                        type: "REMOVE_FROM_CART",
+                                                        payload: prod,
+                                                    })}
+                                                />
+                                            </Dropdown.Item>
+                                        ))}
+                                        <Link to='/cart'>
+                                            <Button style={{
+                                                width: '95%',
+                                                margin: '0 10px'
+                                            }}>
+                                                Go to Cart
+                                            </Button>
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <span style={{ padding: 10 }}> cart is ampty</span>
+                                )}
 
 
-                        </Dropdown.Menu>
+                            </Dropdown.Menu>
 
-                    </Dropdown>
-                </Nav>
-            </Container>
-        </Navbar>
+                        </Dropdown>
+                    </Nav>
+                </Container>
+            </Navbar>
         </div>
     )
 }
